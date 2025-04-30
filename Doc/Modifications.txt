@@ -1,0 +1,22 @@
+Modifications:
+There will also be an abstract SuperUser class with subclasses Admin and User
+it will have fields
+name : string
+id : int
+and method
+getExportData() : String
+static FromExportData() : SuperUser
+
+Admin will have methods
+checkUserTasks(User user) : List<Task>
+giveUserTask(User user, Task task) : boolean
+getExportData() : String
+
+User will have field
+taskManager : TaskManager
+and methods
+ClearTasks() : void
+setTaskCompleted(Task task) : boolean
+getExportData() : String
+
+Every user will have a TaskManager to manage their tasks and the admins can give the users new tasks to do.
