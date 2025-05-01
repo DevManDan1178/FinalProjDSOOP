@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.Objects;
 
 public abstract class Task implements Comparable<Task> {
     private String title;
@@ -34,7 +35,7 @@ public abstract class Task implements Comparable<Task> {
      * @return task data as CSV format
      */
     public String getExportData() {
-        return String.format("%s, %s, %s, %s", title, description, taskPriority, dueDate);
+        return String.format("%s,%s,%s,%s", title, description, taskPriority, dueDate);
     }
 
     /**
@@ -98,13 +99,27 @@ public abstract class Task implements Comparable<Task> {
             return switch (compareType) {
                 case Priority -> o1.getTaskPriority() - o2.getTaskPriority();
                 case DueDate -> o1.getDueDate().compareTo(o2.getDueDate());
-                default -> (o1.getTaskPriority() - o2.getTaskPriority()) * 7200 + minutesBetweenDates(o1.getDueDate(), o2.getDueDate());
+                default ->
+                        (o1.getTaskPriority() - o2.getTaskPriority()) * 7200 + minutesBetweenDates(o1.getDueDate(), o2.getDueDate());
             };
         }
 
         public enum TaskCompareType {
             Priority, DueDate, Default
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return taskPriority == task.taskPriority && Objects.equals(title, task.title) && Objects.equals(description, task.description) && Objects.equals(dueDate, task.dueDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, taskPriority, dueDate);
     }
 
     public String getTitle() {

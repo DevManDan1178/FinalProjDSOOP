@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class RegularTask extends Task {
     private double timeIntervalHours;
@@ -34,6 +35,20 @@ public class RegularTask extends Task {
     @Override
     public String getExportData() {
         return String.format("%s,%s,RT", super.getExportData(), timeIntervalHours);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        RegularTask that = (RegularTask) o;
+        return Double.compare(timeIntervalHours, that.timeIntervalHours) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), timeIntervalHours);
     }
 
     public double getTimeIntervalHours() {

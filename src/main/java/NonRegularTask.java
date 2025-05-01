@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class NonRegularTask extends Task {
     private boolean completed;
@@ -24,6 +25,20 @@ public class NonRegularTask extends Task {
     @Override
     public String getExportData() {
         return String.format("%s,%s,NRT", super.getExportData(), completed);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        NonRegularTask that = (NonRegularTask) o;
+        return completed == that.completed;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), completed);
     }
 
     public boolean isCompleted() {
