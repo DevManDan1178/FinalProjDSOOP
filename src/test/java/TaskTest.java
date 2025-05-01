@@ -58,4 +58,47 @@ public class TaskTest {
         Task actual = Task.fromExportData(exportData);
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testFromInvalidExportData() {
+        Task expected = null;
+        Task actual = Task.fromExportData("this is not valid export data");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testRTSkip() {
+        RegularTask task = new RegularTask("T", "D", 1, LocalDateTime.now(), 24);
+        LocalDateTime expected = task.getDueDate().plusHours(24 * 4);
+        LocalDateTime actual = task.skip(4);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testRTRefresh() {
+        RegularTask task = new RegularTask("T", "D", 1, LocalDateTime.now(), 24);
+        LocalDateTime expected = task.getDueDate().plusHours(24);
+        LocalDateTime actual = task.refresh();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testNRTClose() {
+        NonRegularTask task = new NonRegularTask("T", "D", 1, LocalDateTime.now());
+        task.closeTask();
+        Assertions.assertTrue(task.isCompleted());
+        Assertions.assertEquals("(Completed) D", task.getDescription());
+        Assertions.assertEquals(-1, task.getTaskPriority());
+    }
+
+    @Test
+    public void testMinBetweenDates() {
+        int expected = 20000;
+        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime inALotOfMinutes = dateTime.plusMinutes(expected);
+        int actual = Task.TaskComparator.minutesBetweenDates(dateTime, inALotOfMinutes);
+        Assertions.assertEquals(expected, actual);
+    }
+
+
 }
