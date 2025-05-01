@@ -100,5 +100,4 @@ public class TaskTest {
         Assertions.assertEquals(expected, actual);
     }
 
-
 }
