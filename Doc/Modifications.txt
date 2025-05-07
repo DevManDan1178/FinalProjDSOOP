@@ -6,6 +6,7 @@ id : int
 and method
 getExportData() : String
 static FromExportData() : SuperUser
+getExportData() : String
 
 Admin will have methods
 checkUserTasks(User user) : List<Task>
@@ -20,3 +21,8 @@ setTaskCompleted(Task task) : boolean
 getExportData() : String
 
 Every user will have a TaskManager to manage their tasks and the admins can give the users new tasks to do.
+
+--
+TaskOperations interface
+    Added an argument of Task.TaskComparator into the TaskOperations sortTask() method
+    Replaced updateTask(Task task) with deleteTask(Task task)
