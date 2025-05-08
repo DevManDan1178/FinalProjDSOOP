@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+
 public class User extends SuperUser {
-    TaskManager taskManager;
+    private TaskManager taskManager;
 
     public User(String name) {
         super(name);
@@ -15,17 +17,21 @@ public class User extends SuperUser {
      * Clears the user's task manager's tasks
      */
     public void clearTasks() {
-        //TODO
+        taskManager.setTasks(new ArrayList<Task>());
     }
 
     /**
      * Sets the task to completed in the user's task manager
      *
-     * @param task task to set as completed
+     * @param task task to set as completed (must be NonRegularTask)
      * @return true if just set to completed | false if nothing to set or if already set (nothing changed)
      */
     public boolean setTaskCompleted(Task task) {
-        return false; //TODO
+        if (taskManager.getTasks().contains(task) && task instanceof NonRegularTask NRTask) {
+            NRTask.closeTask();
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -39,5 +45,13 @@ public class User extends SuperUser {
             tasksExportData += task.getExportData();
         }
         return String.format("%s,%s", super.getExportData(), tasksExportData);
+    }
+
+    public TaskManager getTaskManager() {
+        return taskManager;
+    }
+
+    public void setTaskManager(TaskManager taskManager) {
+        this.taskManager = taskManager;
     }
 }

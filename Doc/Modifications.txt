@@ -23,6 +23,8 @@ getExportData() : String
 Every user will have a TaskManager to manage their tasks and the admins can give the users new tasks to do.
 
 --
+Set importTasks in TaskManager to static since it returns a list of tasks that does not change between instances
+--
 TaskOperations interface
     Added an argument of Task.TaskComparator into the TaskOperations sortTask() method
     Replaced updateTask(Task task) with deleteTask(Task task)

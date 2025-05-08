@@ -22,16 +22,29 @@ public abstract class SuperUser {
 
     /**
      * Returns a SuperUser from the export data
+     *
      * @param exportData export data
      * @return a User or Admin with corresponding data members
      */
     public SuperUser fromExportData(String exportData) {
         String[] data = exportData.split(",");
-        if (data.length != 2) {
+        try {
+            if (data[2] == "Ad") {
+                return new Admin(data[0], Integer.parseInt(data[1]));
+            } else {
+                User user = new User(data[0], Integer.parseInt(data[1]));
+                for (int i = 2; i < data.length; i++) {
+                    Task exportedTask = Task.fromExportData(data[i]);
+                    if (exportedTask != null) {
+                        user.getTaskManager().addTask(exportedTask);
+                    }
+                }
+                return user;
+            }
+        } catch (Exception e) {
             System.out.println("Invalid export data - " + exportData);
             return null;
         }
-        return null; //TODO
     }
 
     /**

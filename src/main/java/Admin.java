@@ -15,7 +15,7 @@ public class Admin extends SuperUser{
      * @return list of tasks the user has
      */
     public List<Task> checkUserTasks(User user) {
-        return null; //TODO
+        return user.getTaskManager().getTasks();
     }
 
     /**
@@ -25,7 +25,7 @@ public class Admin extends SuperUser{
      * @return true if just added the task, false if task was already there (nothing was done)
      */
     public boolean giveUserTask(User user, Task task) {
-        return false; //TODO
+        return user.getTaskManager().addTask(task);
     }
 
     /**

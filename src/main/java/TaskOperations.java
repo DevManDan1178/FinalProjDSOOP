@@ -8,9 +8,11 @@ public interface TaskOperations {
 
     /**
      * Deletes the task from the list of tasks
+     *
      * @param task task to delete
+     * @return true if was deleted | false if nothing happened (not there to begin with)
      */
-    void deleteTask(Task task);
+    boolean deleteTask(Task task);
 
     /**
      * Sorts the tasks in the list of tasks
