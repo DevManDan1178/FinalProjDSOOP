@@ -18,13 +18,20 @@ public class NonRegularTask extends Task {
      */
     public void closeTask() {
         completed = true;
-        setDescription("(Completed) " + getDescription());
+        setTitle("(Completed) " + getTitle());
         setTaskPriority(-1);
     }
 
     @Override
     public String getExportData() {
         return String.format("%s,%s,NRT", super.getExportData(), completed);
+    }
+
+    @Override
+    public String toString() {
+        return "NonRegularTask{" +
+                "completed=" + completed +
+                '}' + super.toString();
     }
 
     @Override

@@ -7,6 +7,10 @@ public class TaskManager implements TaskOperations {
     private List<Task> tasks;
     private final static String pathInResources = "src/main/resources/";
 
+    public TaskManager() {
+        this.tasks = new ArrayList<>();
+    }
+
     /**
      * Gets the tasks to do and sets them in a queue based on the priority obtained from the comparator
      *
@@ -68,7 +72,7 @@ public class TaskManager implements TaskOperations {
      * Gets a list of tasks with the keyword in the title and completed or not based on the completion status filter | NOT CASE SENSITIVE
      *
      * @param keyword                keyword to filter for
-     * @param completionStatusFilter if the tasks should be completed or not completed
+     * @param completionStatusFilter if the tasks should be completed or not completed (Regular tasks count as not completed)
      * @return list of tasks with keyword in title and the appropriate completion status
      */
     public List<Task> searchForTasks(String keyword, boolean completionStatusFilter) {
@@ -105,7 +109,7 @@ public class TaskManager implements TaskOperations {
 
     @Override
     public boolean addTask(Task task) {
-        if (tasks.contains(task)) {
+        if (task == null || tasks.contains(task)) {
             return false;
         }
         tasks.add(task);
@@ -114,6 +118,9 @@ public class TaskManager implements TaskOperations {
 
     @Override
     public boolean deleteTask(Task task) {
+        if (task == null) {
+            return false;
+        }
         if (tasks.contains(task)) {
             tasks.remove(task);
             return true;

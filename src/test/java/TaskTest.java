@@ -99,5 +99,4 @@ public class TaskTest {
         int actual = Task.TaskComparator.minutesBetweenDates(dateTime, inALotOfMinutes);
         Assertions.assertEquals(expected, actual);
     }
-
 }

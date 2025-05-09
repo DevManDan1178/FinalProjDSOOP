@@ -110,6 +110,16 @@ public abstract class Task implements Comparable<Task> {
     }
 
     @Override
+    public String toString() {
+        return "Task{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", taskPriority=" + taskPriority +
+                ", dueDate=" + dueDate +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

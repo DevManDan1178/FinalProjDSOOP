@@ -1,4 +1,5 @@
 import java.security.PublicKey;
+import java.util.Arrays;
 import java.util.Objects;
 
 public abstract class SuperUser {
@@ -26,10 +27,10 @@ public abstract class SuperUser {
      * @param exportData export data
      * @return a User or Admin with corresponding data members
      */
-    public SuperUser fromExportData(String exportData) {
+    public static SuperUser fromExportData(String exportData) {
         String[] data = exportData.split(",");
         try {
-            if (data[2] == "Ad") {
+            if (data.length == 3 && "Ad".equals(data[2])) {
                 return new Admin(data[0], Integer.parseInt(data[1]));
             } else {
                 User user = new User(data[0], Integer.parseInt(data[1]));
