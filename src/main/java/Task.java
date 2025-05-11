@@ -87,6 +87,9 @@ public abstract class Task implements Comparable<Task> {
          * @return positive if first is earlier, negative if first is later, number corresponds to the difference in minutes between them
          */
         public static int minutesBetweenDates(LocalDateTime date1, LocalDateTime date2) {
+            if (date1 == null || date2 == null) {
+                return 0;
+            }
             return -((date1.getYear() - date2.getYear()) * 525600 +
                     (date1.getDayOfYear() - date2.getDayOfYear()) * 1440 +
                     (date1.getHour() - date2.getHour()) * 60 +

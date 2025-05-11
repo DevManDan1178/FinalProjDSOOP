@@ -52,6 +52,9 @@ public class User extends SuperUser {
     }
 
     public void setTaskManager(TaskManager taskManager) {
+        if (taskManager == null) {
+            return;
+        }
         this.taskManager = taskManager;
     }
 }

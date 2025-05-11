@@ -138,6 +138,9 @@ public class TaskManager implements TaskOperations {
     }
 
     public void setTasks(List<Task> tasks) {
+        if (tasks == null) {
+            return;
+        }
         this.tasks = tasks;
     }
 }

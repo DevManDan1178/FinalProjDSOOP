@@ -8,19 +8,23 @@ public class TaskTest {
     public void testPreReschedule() {
         LocalDateTime expected = LocalDateTime.now();
         Task task = new NonRegularTask("T", "D", 1, expected);
-        task.reschedule(expected.minusDays(5));
+        boolean expectedReturn = false;
+        boolean actualReturn = task.reschedule(expected.minusDays(5));
         LocalDateTime actual = task.getDueDate();
         Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expectedReturn, actualReturn);
     }
 
     @Test
     public void testPostReschedule() {
         LocalDateTime dateTime = LocalDateTime.now();
         Task task = new NonRegularTask("T", "D", 1, dateTime);
-        task.reschedule(dateTime.plusDays(5));
+        boolean expectedReturn = true;
+        boolean actualReturn = task.reschedule(dateTime.plusDays(5));
         LocalDateTime expected = dateTime.plusDays(5);
         LocalDateTime actual = task.getDueDate();
         Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(expectedReturn, actualReturn);
     }
 
 
