@@ -100,10 +100,10 @@ public abstract class Task implements Comparable<Task> {
         @Override
         public int compare(Task o1, Task o2) {
             return switch (compareType) {
-                case Priority -> o1.getTaskPriority() - o2.getTaskPriority();
-                case DueDate -> o1.getDueDate().compareTo(o2.getDueDate());
+                case Priority -> -(o1.getTaskPriority() - o2.getTaskPriority());
+                case DueDate -> -o1.getDueDate().compareTo(o2.getDueDate());
                 default ->
-                        (o1.getTaskPriority() - o2.getTaskPriority()) * 7200 + minutesBetweenDates(o1.getDueDate(), o2.getDueDate());
+                        -(o1.getTaskPriority() - o2.getTaskPriority()) * 7200 + minutesBetweenDates(o1.getDueDate(), o2.getDueDate());
             };
         }
 
