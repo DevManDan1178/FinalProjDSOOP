@@ -47,6 +47,13 @@ public class User extends SuperUser {
         return String.format("%s,%s", super.getExportData(), tasksExportData.substring(0, tasksExportData.length() - 1));
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "taskManager=" + taskManager +
+                '}' + super.toString();
+    }
+
     public TaskManager getTaskManager() {
         return taskManager;
     }
