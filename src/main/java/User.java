@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class User extends SuperUser {
     private TaskManager taskManager;
@@ -52,6 +53,20 @@ public class User extends SuperUser {
         return "User{" +
                 "taskManager=" + taskManager +
                 '}' + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        User user = (User) o;
+        return Objects.equals(taskManager, user.taskManager);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), taskManager);
     }
 
     public TaskManager getTaskManager() {
