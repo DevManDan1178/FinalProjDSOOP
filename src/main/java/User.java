@@ -42,9 +42,9 @@ public class User extends SuperUser {
     public String getExportData() {
         String tasksExportData = "";
         for (Task task : taskManager.getTasks()) {
-            tasksExportData += task.getExportData();
+            tasksExportData += task.getExportData().replace(',', '▀') + ",";
         }
-        return String.format("%s,%s", super.getExportData(), tasksExportData);
+        return String.format("%s,%s", super.getExportData(), tasksExportData.substring(0, tasksExportData.length() - 1));
     }
 
     public TaskManager getTaskManager() {

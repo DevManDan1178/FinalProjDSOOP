@@ -35,7 +35,7 @@ public abstract class SuperUser {
             } else {
                 User user = new User(data[0], Integer.parseInt(data[1]));
                 for (int i = 2; i < data.length; i++) {
-                    Task exportedTask = Task.fromExportData(data[i]);
+                    Task exportedTask = Task.fromExportData(data[i].replace('▀', ','));
                     if (exportedTask != null) {
                         user.getTaskManager().addTask(exportedTask);
                     }
